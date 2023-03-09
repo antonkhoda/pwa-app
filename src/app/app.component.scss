@@ -1,0 +1,30 @@
+.wrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .book {
+    padding: 50px;
+    margin-bottom: 50px;
+  }
+
+  button{
+    line-height: 50px;
+    padding: 0 50px;
+    text-transform: uppercase;
+    border: none;
+    transition: 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      background: #cacf68;
+    }
+  }
+
+  .book,
+  button{
+    background: #dde0ab;
+    box-shadow: 10px 10px 0px 0px #97cba9;
+  }
+}
