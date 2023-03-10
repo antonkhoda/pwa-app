@@ -1,6 +1,8 @@
 {
-  "language.english": "English",
-  "language.ukrainian": "Ukrainian",
+  "language" : {
+    "english": "English",
+    "ukrainian": "Ukrainian"
+  },
   "author": "Author",
   "country": "Country",
   "button": "Find a new book"

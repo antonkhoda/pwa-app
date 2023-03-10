@@ -1,6 +1,8 @@
 {
-  "language.english": "Англійська",
-  "language.ukrainian": "Українська",
+  "language" : {
+    "english": "Англійська",
+    "ukrainian": "Українська"
+  },
   "author": "Автор",
   "country": "Країна",
   "button": "Знайдіть нову книгу"
