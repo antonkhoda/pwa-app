@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BookFields, DataService, Library } from './data.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
   public book!: BookFields;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private data: DataService) {}
+  constructor(private data: DataService, private translateService: TranslateService) {}
 
   ngOnInit() {
     this.subscriptions.add(
@@ -32,5 +33,9 @@ export class AppComponent {
       this.library.records[
         Math.floor(Math.random() * this.library.records.length)
       ].fields;
+  }
+
+  public selectLanguage(value: string): void {
+    this.translateService.use(value);
   }
 }

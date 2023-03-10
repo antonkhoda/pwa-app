@@ -1,8 +1,12 @@
 <div class="wrapper">
+  <div class="buttons">
+    <button (click)="selectLanguage('en-US')" class="collapse-btn">{{ 'language.english' | translate }}</button>
+    <button (click)="selectLanguage('uk_UA')" class="collapse-btn">{{ 'language.ukrainian' | translate }}</button>
+  </div>
   <div class="book" *ngIf="book">
     <h1>{{ book.Title }}</h1>
-    <p>Author: {{ book.Author }}</p>
-    <p>Country: {{ book.Country }}</p>
+    <p>{{ 'author' | translate }}: {{ book.Author }}</p>
+    <p>{{ 'country' | translate }}: {{ book.Country }}</p>
   </div>
-  <button (click)="getRandomBook()" class="collapse-btn">Find a new book</button>
+  <button (click)="getRandomBook()" class="collapse-btn">{{ 'button' | translate }}</button>
 </div>
