@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+
 import { Subscription } from 'rxjs';
-import { BookFields, DataService, Library } from './data.service';
 import { TranslateService } from '@ngx-translate/core';
+import { DataService } from './data.service';
+import { BookFields, Book } from './book.interface';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +11,18 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public library!: Library;
-  public book!: BookFields;
+  public library!: Book[];
+  public currentBook!: BookFields;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private data: DataService, private translateService: TranslateService) {}
+  constructor(
+    private data: DataService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit() {
     this.subscriptions.add(
-      this.data.getLibrary().subscribe((data) => {
+      this.data.getCompiledLibraryData().subscribe((data) => {
         this.library = data;
         this.getRandomBook();
       })
@@ -29,10 +34,8 @@ export class AppComponent {
   }
 
   public getRandomBook(): void {
-    this.book =
-      this.library.records[
-        Math.floor(Math.random() * this.library.records.length)
-      ].fields;
+    this.currentBook =
+      this.library[Math.floor(Math.random() * this.library.length)].fields;
   }
 
   public selectLanguage(value: string): void {

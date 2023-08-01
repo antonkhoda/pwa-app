@@ -1,33 +1,46 @@
 import { Injectable } from '@angular/core';
+
+import { Observable, forkJoin, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-export interface Library {
-  offset: string;
-  records: Book[];
-}
-
-export interface Book {
-  createdTime: string;
-  fields: BookFields;
-  id: string[];
-}
-
-export interface BookFields {
-  Amazon_Link: string;
-  Author: string;
-  Country: string;
-  Title: string;
-}
+import { bookCover } from './core/mocks/book.mock';
+import { BookLibrary } from './book.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  public getLibrary(): Observable<BookLibrary> {
+    return this.http.get<BookLibrary>(
+      'https://api.airtable.com/v0/appybL1OJaEEIvAdS/Books?api_key=keymAugpaEvXsyGBr'
+    );
+  }
 
-  public getLibrary(): Observable<Library> {
-    return this.http.get<Library>('https://api.airtable.com/v0/appybL1OJaEEIvAdS/Books?api_key=keymAugpaEvXsyGBr')
+  public getBookCoverDictionary(): Observable<Map<string, string>> {
+    return of(bookCover).pipe(
+      map((covers) => {
+        const dictionary = new Map<string, string>();
+
+        covers.forEach((element) => {
+          dictionary.set(element.id, element.picture);
+        });
+        return dictionary;
+      })
+    );
+  }
+
+  public getCompiledLibraryData(): Observable<any> {
+    return forkJoin([this.getLibrary(), this.getBookCoverDictionary()]).pipe(
+      map(([data, mapperBookCover]) => {
+        return data.records.map((book) => ({
+          ...book,
+          fields: {
+            ...book.fields,
+            picture: mapperBookCover.get(book.id),
+          },
+        }));
+      })
+    );
   }
 }

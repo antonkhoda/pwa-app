@@ -1,12 +1,13 @@
 <div class="wrapper">
   <div class="translation-control">
-    <button (click)="selectLanguage('en-US')" class="collapse-btn">{{ 'language.english' | translate }}</button>
-    <button (click)="selectLanguage('uk_UA')" class="collapse-btn">{{ 'language.ukrainian' | translate }}</button>
-  </div>
-  <div class="book" *ngIf="book">
-    <h1>{{ book.Title }}</h1>
-    <p>{{ 'author' | translate }}: {{ book.Author }}</p>
-    <p>{{ 'country' | translate }}: {{ book.Country }}</p>
+    <button (click)="selectLanguage('en-US')">{{ 'language.english' | translate }}</button>
+    <button (click)="selectLanguage('uk_UA')">{{ 'language.ukrainian' | translate }}</button>
   </div>
   <button (click)="getRandomBook()" class="collapse-btn">{{ 'button' | translate }}</button>
+  <div class="book" *ngIf="currentBook">
+    <img *ngIf="currentBook.picture" [src]="currentBook.picture" alt="cover" class="book-cover">
+    <h1>{{ currentBook.Title }}</h1>
+    <p>{{ 'author' | translate }}: {{ currentBook.Author }}</p>
+    <p>{{ 'country' | translate }}: {{ currentBook.Country }}</p>
+  </div>
 </div>
