@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { DataService } from './data.service';
+import { DataService } from './core/services/data.service';
 import { BookFields, Book } from './book.interface';
 
 @Component({
@@ -38,7 +38,8 @@ export class AppComponent {
       this.library[Math.floor(Math.random() * this.library.length)].fields;
   }
 
-  public selectLanguage(value: string): void {
+  public selectLanguage(value: string): string {
     this.translateService.use(value);
+    return value;
   }
 }

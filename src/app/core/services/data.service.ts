@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable, forkJoin, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { bookCover } from './core/mocks/book.mock';
-import { BookLibrary } from './book.interface';
+import { bookCover } from '../mocks/book.mock';
+import { Book, BookLibrary } from '../../book.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class DataService {
     );
   }
 
-  public getCompiledLibraryData(): Observable<any> {
+  public getCompiledLibraryData(): Observable<Book[]> {
     return forkJoin([this.getLibrary(), this.getBookCoverDictionary()]).pipe(
       map(([data, mapperBookCover]) => {
         return data.records.map((book) => ({
