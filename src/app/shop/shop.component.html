@@ -1,0 +1,34 @@
+<div class="wrapper">
+  <div class="navigation-control">
+    <button (click)="onLogOut()" class="green-btn">{{ "log-out" | translate }}</button>
+    <app-cart [order]="currentUser?.cart" [userRole]="currentUser?.role" (clearAll)="onCleareCart()"
+      (makeOrder)="onMakeOrder()"></app-cart>
+  </div>
+  <div class="translation-control">
+    <button (click)="selectLanguage('en-US')">
+      {{ "language.english" | translate }}
+    </button>
+    <button (click)="selectLanguage('uk_UA')">
+      {{ "language.ukrainian" | translate }}
+    </button>
+  </div>
+  <button (click)="getRandomBook()" class="collapse-btn">
+    {{ "find-book" | translate }}
+  </button>
+  <div class="book" *ngIf="currentBook">
+    <div class="book-price">
+      <span>{{ "price" | translate }}:
+        {{ currentBook.fields.price | currency }}</span>
+      <button (click)="onAddToCart(currentBook)" class="green-btn" [disabled]="isBookInCart(currentBook.id)">
+        {{ "add-to-cart" | translate }}
+        <span *ngIf="isBookInCart(currentBook.id)" class="label">
+          {{ "already-in-cart" | translate }}
+        </span>
+      </button>
+    </div>
+    <img *ngIf="currentBook.fields.picture" [src]="currentBook.fields.picture" alt="cover" class="book-cover" />
+    <h1>{{ currentBook.fields.Title }}</h1>
+    <p>{{ "author" | translate }}: {{ currentBook.fields.Author }}</p>
+    <p>{{ "country" | translate }}: {{ currentBook.fields.Country }}</p>
+  </div>
+</div>

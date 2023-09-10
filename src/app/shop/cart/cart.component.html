@@ -1,0 +1,32 @@
+<div class="cart">
+  <button (click)="onOpenWindow()" class="green-btn counter" [disabled]="!order?.length">
+    {{ "cart" | translate }}
+    <span *ngIf="order?.length" class="label">
+      {{ order?.length }}
+    </span>
+  </button>
+  <div *ngIf="isOpenWindow" class="cart-window">
+    <div *ngFor="let book of order" class="book">
+      <div class="book-cover">
+        <img *ngIf="book.fields.picture" [src]="book.fields.picture" alt="cover" />
+      </div>
+      <div class="book-title">{{ book.fields.Title }}</div>
+      <span class="book-price">{{ book.fields.price | currency }}</span>
+    </div>
+    <div class="cart-window-bottom">
+      <div class="price">
+        <span>{{ "total-price" | translate }}:</span>
+        <span>{{ getTotalPrice() | currency }}</span>
+      </div>
+      <button (click)="onClearAll()" class="green-btn" [disabled]="!order?.length">
+        {{ "clear-all" | translate }}
+      </button>
+      <button (click)="onMakeOrder()" class="green-btn make-order" [disabled]="!isRoleIsUser(userRole)">
+        {{ "make-order" | translate }}
+        <span *ngIf="!isRoleIsUser(userRole)" class="label">
+          {{ "login-as-user" | translate }}
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

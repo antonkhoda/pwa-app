@@ -1,0 +1,45 @@
+<div class="wrapper">
+  <div class="translation-control">
+    <button (click)="selectLanguage('en-US')">
+      {{ "language.english" | translate }}
+    </button>
+    <button (click)="selectLanguage('uk_UA')">
+      {{ "language.ukrainian" | translate }}
+    </button>
+  </div>
+  <div class="dialog" *ngIf="!isGuest">
+    <h1>{{ "login" | translate }}</h1>
+    <form [formGroup]="loginForm">
+      <label>
+        <span>Email</span>
+        <input type="text" formControlName="email" />
+      </label>
+      <div *ngIf="isShowMessage" class="error-message">
+        {{ "login-error" | translate }}
+      </div>
+      <label>
+        <span>{{ "password" | translate }}</span>
+        <input type="password" formControlName="password" />
+      </label>
+    </form>
+    <button (click)="login()" [disabled]="loginForm.invalid">
+      {{ "confirm" | translate }}
+    </button>
+    <button (click)="onChangeWindow()">
+      {{ "login-as-guest" | translate }}
+    </button>
+  </div>
+  <div class="dialog" *ngIf="isGuest">
+    <h1>{{ "login-as-guest" | translate }}</h1>
+    <form [formGroup]="guestForm">
+      <label>
+        <span>{{ "name" | translate }}</span>
+        <input type="text" formControlName="name" />
+      </label>
+    </form>
+    <button (click)="loginAsGuest()" [disabled]="guestForm.invalid">
+      {{ "confirm" | translate }}
+    </button>
+    <button (click)="onChangeWindow()">{{ "login-page" | translate }}</button>
+  </div>
+</div>

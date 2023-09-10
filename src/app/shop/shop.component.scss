@@ -1,0 +1,86 @@
+@import './../core/colors';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 20px;
+
+  .book {
+    max-width: 70%;
+    padding: 25px;
+
+    &-price{
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 10px;
+    }
+
+    &-cover {
+      width: 250px;
+      height: 400px;
+      object-fit: cover;
+      border: 10px solid $green;
+    }
+
+    h1,
+    p {
+      margin: 0 0 25px 0;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+
+  .navigation-control{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .translation-control,
+  .collapse-btn {
+    margin-bottom: 50px;
+  }
+
+  button {
+    line-height: 50px;
+    padding: 0 50px;
+    text-transform: uppercase;
+    border: none;
+    transition: 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      background: $yellow-hover;
+    }
+  }
+
+  .book,
+  button {
+    background: $yellow;
+    box-shadow: 10px 10px 0px 0px $green;
+  }
+
+  .green-btn{
+    position: relative;
+    background-color: $green;
+    box-shadow: none;
+
+    .label{
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      padding: 0 5px;
+      line-height: 20px;
+      background-color: $yellow-hover;
+    }
+
+    &:hover {
+      background: $green-hover;
+    }
+  }
+}

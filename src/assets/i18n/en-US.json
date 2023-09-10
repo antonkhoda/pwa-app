@@ -5,5 +5,21 @@
   },
   "author": "Author",
   "country": "Country",
-  "button": "Find a new book"
+  "find-book": "Find a new book",
+  "login": "Login",
+  "password": "Password",
+  "confirm": "Confirm",
+  "login-as-guest": "Login as guest",
+  "name": "Name",
+  "login-page": "Login page",
+  "login-error": "Error: Wrong email or password. Please try again or login as a guest",
+  "price": "Price",
+  "cart": "Cart",
+  "add-to-cart": "Add to cart",
+  "already-in-cart": "Already in cart",
+  "total-price": "Total price",
+  "make-order": "Make an order",
+  "clear-all": "Clear all",
+  "log-out": "Log out",
+  "login-as-user": "Need to Login as user"
 }

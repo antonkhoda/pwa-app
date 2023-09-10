@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { By } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -11,8 +9,8 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, TranslateModule.forRoot()],
       declarations: [AppComponent],
+      imports: [RouterModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -22,10 +20,5 @@ describe('AppComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('selectLanguage', () => {
-    const result = component.selectLanguage('uk_UA');
-    expect(result).toBe('uk_UA');
   });
 });

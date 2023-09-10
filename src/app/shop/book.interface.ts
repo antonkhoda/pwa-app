@@ -14,6 +14,7 @@ export interface BookFields {
   Author: string;
   Country: string;
   Title: string;
+  price?: number;
   picture?: string;
 }
 

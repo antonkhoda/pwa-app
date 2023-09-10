@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable, forkJoin, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { bookCover } from '../mocks/book.mock';
-import { Book, BookLibrary } from '../../book.interface';
+import { bookCover, bookUrl } from '../mocks/book.mock';
+import { Book, BookLibrary } from '../../shop/book.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +11,12 @@ import { Book, BookLibrary } from '../../book.interface';
 export class DataService {
   constructor(private http: HttpClient) {}
 
-  public getLibrary(): Observable<BookLibrary> {
-    return this.http.get<BookLibrary>(
-      'https://api.airtable.com/v0/appybL1OJaEEIvAdS/Books?api_key=keymAugpaEvXsyGBr'
-    );
+  public getStoreUrl(): Observable<string> {
+    return of(bookUrl);
+  }
+
+  public getLibrary(url: string): Observable<BookLibrary> {
+    return this.http.get<BookLibrary>(url);
   }
 
   public getBookCoverDictionary(): Observable<Map<string, string>> {
@@ -30,13 +32,14 @@ export class DataService {
     );
   }
 
-  public getCompiledLibraryData(): Observable<Book[]> {
-    return forkJoin([this.getLibrary(), this.getBookCoverDictionary()]).pipe(
+  public getCompiledLibraryData(url: string): Observable<Book[]> {
+    return forkJoin([this.getLibrary(url), this.getBookCoverDictionary()]).pipe(
       map(([data, mapperBookCover]) => {
         return data.records.map((book) => ({
           ...book,
           fields: {
             ...book.fields,
+            price: Math.floor((Math.random() * (15 - 5) + 5) * 100) / 100,
             picture: mapperBookCover.get(book.id),
           },
         }));

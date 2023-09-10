@@ -1,3 +1,13 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
 body {
   background: #668ba4;
   color: #000;
@@ -6,6 +16,6 @@ body {
 }
 
 button,
-body{
+body {
   font-family: "Oswald", sans-serif;
 }
